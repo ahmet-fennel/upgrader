@@ -10,9 +10,9 @@ import 'mock_itunes_client.dart';
 void main() {
   test('testing ITunesSearchAPI properties', () async {
     final iTunes = ITunesSearchAPI();
-    expect(iTunes.debugEnabled, equals(false));
-    iTunes.debugEnabled = true;
-    expect(iTunes.debugEnabled, equals(true));
+    expect(iTunes.debugLogging, equals(false));
+    iTunes.debugLogging = true;
+    expect(iTunes.debugLogging, equals(true));
     expect(iTunes.iTunesDocumentationURL.length, greaterThan(0));
     expect(iTunes.lookupPrefixURL.length, greaterThan(0));
     expect(iTunes.searchPrefixURL.length, greaterThan(0));
@@ -20,7 +20,12 @@ void main() {
     expect(
         iTunes.lookupURLByBundleId('com.google.Maps', useCacheBuster: false),
         equals(
-            'https://itunes.apple.com/lookup?bundleId=com.google.Maps&country=US'));
+            'https://itunes.apple.com/lookup?bundleId=com.google.Maps&country=US&lang=en'));
+    expect(
+        iTunes.lookupURLByBundleId('com.google.Maps',
+            useCacheBuster: false, language: 'ar'),
+        equals(
+            'https://itunes.apple.com/lookup?bundleId=com.google.Maps&country=US&lang=ar'));
     expect(iTunes.lookupURLById('585027354', useCacheBuster: false),
         equals('https://itunes.apple.com/lookup?id=585027354&country=US'));
     expect(
@@ -30,7 +35,7 @@ void main() {
 
     // Test the URL using the cache buster and remove it from the URL
     const testUrl =
-        'https://itunes.apple.com/lookup?bundleId=com.google.Maps&country=US&_cb=';
+        'https://itunes.apple.com/lookup?bundleId=com.google.Maps&country=US&lang=en&_cb=';
     final url = iTunes
         .lookupURLByBundleId('com.google.Maps', useCacheBuster: true)!
         .substring(0, testUrl.length);
@@ -39,9 +44,11 @@ void main() {
   });
 
   test('testing lookupByBundleId', () async {
-    final client = MockITunesSearchClient.setupMockClient();
+    final client = MockITunesSearchClient.setupMockClient(
+        verifyHeaders: {'header1': 'value1'});
     final iTunes = ITunesSearchAPI();
     iTunes.client = client;
+    iTunes.clientHeaders = {'header1': 'value1'};
 
     final response =
         await iTunes.lookupByBundleId('com.google.Maps', useCacheBuster: false);
@@ -53,9 +60,9 @@ void main() {
     expect(result0, isNotNull);
     expect(result0['bundleId'], 'com.google.Maps');
     expect(result0['version'], '5.6');
-    expect(ITunesResults.bundleId(response), 'com.google.Maps');
-    expect(ITunesResults.releaseNotes(response), 'Bug fixes.');
-    expect(ITunesResults.version(response), '5.6');
+    expect(iTunes.bundleId(response), 'com.google.Maps');
+    expect(iTunes.releaseNotes(response), 'Bug fixes.');
+    expect(iTunes.version(response), '5.6');
   }, skip: false);
 
   test('testing lookupByBundleId unknown app', () async {
@@ -65,10 +72,7 @@ void main() {
 
     final response = await iTunes.lookupByBundleId('com.google.MyApp',
         useCacheBuster: false);
-    expect(response, isInstanceOf<Map>());
-    final results = response!['results'];
-    expect(results, isNotNull);
-    expect(results.length, 0);
+    expect(response, isNull);
   }, skip: false);
 
   test('testing lookupById', () async {
@@ -88,10 +92,10 @@ void main() {
     expect(result0['releaseNotes'], 'Bug fixes.');
     expect(result0['version'], '5.6');
     expect(result0['currency'], 'USD');
-    expect(ITunesResults.bundleId(response), 'com.google.Maps');
-    expect(ITunesResults.releaseNotes(response), 'Bug fixes.');
-    expect(ITunesResults.version(response), '5.6');
-    expect(ITunesResults.currency(response), 'USD');
+    expect(iTunes.bundleId(response), 'com.google.Maps');
+    expect(iTunes.releaseNotes(response), 'Bug fixes.');
+    expect(iTunes.version(response), '5.6');
+    expect(iTunes.currency(response), 'USD');
   }, skip: false);
 
   test('testing lookupById FR', () async {
@@ -110,9 +114,9 @@ void main() {
     expect(result0['bundleId'], 'com.google.Maps');
     expect(result0['version'], '5.6');
     expect(result0['currency'], 'EUR');
-    expect(ITunesResults.bundleId(response), 'com.google.Maps');
-    expect(ITunesResults.version(response), '5.6');
-    expect(ITunesResults.currency(response), 'EUR');
+    expect(iTunes.bundleId(response), 'com.google.Maps');
+    expect(iTunes.version(response), '5.6');
+    expect(iTunes.currency(response), 'EUR');
   }, skip: false);
 
   /// Helper method
@@ -126,7 +130,7 @@ void main() {
 
   /// Helper method
   String? imav(Map response, {String tagName = 'mav'}) {
-    final mav = ITunesResults.minAppVersion(response, tagName: tagName);
+    final mav = ITunesSearchAPI().minAppVersion(response, tagName: tagName);
     return mav?.toString();
   }
 

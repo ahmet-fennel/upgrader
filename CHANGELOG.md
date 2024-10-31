@@ -1,3 +1,210 @@
+## 11.3.0
+
+- [429] Improved the Hindi ('hi') translations. (thanks to @aruhant)
+- [456] Fixed Italian ('it') language translations. (thanks to @marcorizza)
+- [459] Allowed for device_info_plus 11.0.0.
+
+## 11.2.0
+
+- [432] On CupertinoAlertDialog configured CupertinoActionButton isDefaultAction property for the Update button. Thanks to @lukemmtt for the change.
+- Added new language translations for Pashto ('ps'). (thanks to @isshort)
+- Removed old travis.yaml CI file.
+
+## 11.1.0
+
+- [439] Added: Passed the language code to iTunes search api to get localized release notes for the iOS App Store. Thanks to @ibraheemalayan and @Add00w for the changes.
+
+## 11.0.0
+
+- [413] Fixed Haitian Creole messages to use correct grammar. (thanks to @wjeanvilma)
+- [415] Added Kurdish Sorani ('ku') language translation. (thanks to @drpshtiwan)
+- Minimum Flutter supported version is now 3.24.0, and minimum Dart version is 3.5.0.
+- Minor updates to address deprecation warnings.
+
+## 10.3.0
+
+Allowed for package_info_plus 8.0.0.
+
+## 10.2.0
+
+Allowed for package_info_plus 7.0.0.
+
+## 10.1.0
+
+[[386](https://github.com/larryaasen/upgrader/pull/386)] Added client headers that can optionally be passed in with a client.
+
+[[375](https://github.com/larryaasen/upgrader/issues/375)] Fixed issue with Android Play Store titles that contained "\u0027".
+
+## 10.0.1
+
+Allowed for device_info_plus 10.0.0 and package_info_plus 6.0.0.
+
+## 10.0.0
+
+This major update changes the structure of how the internal state is maintained and how access to app stores is provided. The API has not changed for the standard use cases. However, the way in which Appcast is used has changed slightly.
+
+This update also makes it easier to extend upgrader to support more app stores without changing upgrader. This will come into play when used on Linux and Windows, or when supporting alternate app stores on Android.
+
+## 10.0.0-alpha.3
+
+- Fixed deprecation warning for WillPopScope and replaced it with PopScope, which required the minimum Flutter SDK version to be moved up to 3.16.0 in this package.
+- Renamed parameter canDismissDialog to barrierDismissible in `UpgradeAlert`.
+
+### 10.0.0
+
+This major update changes the structure of how the internal state is maintained and how access to app stores is provided. The API has not changed for the standard use cases. However, the way in which Appcast is used has changed slightly.
+
+This update also makes it easier to extend upgrader to support more app stores without changing upgrader. This will come into play when used on Linux and Windows, or when supporting alternate app stores on Android.
+
+### Changes in 10.0.0
+- Implemented [UpgraderState] that is used internally to replace evaluation ready.
+- BREAKING: Removed Appcast configuration so that an Appcast [UpgraderStore] can be used.
+- Fixed deprecation warning for WillPopScope and replaced it with PopScope, which required the minimum Flutter SDK version to be moved up to 3.16.0 in this package.
+- Renamed parameter canDismissDialog to barrierDismissible in `UpgradeAlert`.
+
+## 10.0.0-alpha.2
+
+(README file and documentation updates)
+
+This major update changes the structure of how the internal state is maintained and how access to app stores is provided. The API has not changed for the standard use cases. However, the way in which Appcast is used has changed slightly.
+
+This update also makes it easier to extend upgrader to support more app stores without changing upgrader. This will come into play when used on Linux and Windows, or when supporting alternate app stores on Android.
+
+### Changes in 10.0.0
+- Implemented [UpgraderState] that is used internally to replace evaluation ready.
+- BREAKING: Removed Appcast configuration so that an Appcast [UpgraderStore] can be used.
+
+## 10.0.0-alpha.1
+
+- Implemented [UpgraderState] that is used internally to replace evaluation ready.
+- BREAKING: Removed Appcast configuration so that an Appcast [UpgraderStore] can be used.
+
+## 9.0.0
+
+### BREAKING CHANGES
+
+- Moved UI related code outside of Upgrader and into UpgradeAlert and UpgradeCard. Also,
+renamed the private methods to make them public. Added and improved example code and README.
+- Minimum Dart SDK 3.1.0
+- Minimum Flutter SDK 3.13.1
+- [371] Added key to alert dialog and alert card.
+- [371] Added the parameter `dialogKey` to `UpgraderAlert` that is used by the alert dialog.
+- Changed currentAppStoreListingURL, currentAppStoreVersion, and currentInstalledVersion from functions to getters.
+
+Note: This [9.0.0] release is the same as [9.0.0-alpha.3].
+
+## 9.0.0-alpha.3
+
+- [371] Added the parameter `dialogKey` to `UpgraderAlert` that is used by the alert dialog.
+
+## 9.0.0-alpha.2
+
+- Changed currentAppStoreListingURL, currentAppStoreVersion, and currentInstalledVersion from functions to getters.
+- [371] Added key to alert dialog and alert card.
+
+## 9.0.0-alpha.1
+
+- BREAKING: Moved UI related code outside of Upgrader and into UpgradeAlert and UpgradeCard. Also,
+renamed the private methods to make them public. Added and improved example code and README.
+- Minimum Dart SDK 3.1.0
+- Minimum Flutter SDK 3.13.1
+
+## 8.4.0
+
+- [356] Fixed centering issue with Cupertino style UpgradeAlert dialog.
+- [357] [359] Updated the package_info_plus dependency to '>=4.0.1 <6.0.0'. Thanks to [@Zazo032](https://github.com/Zazo032) for this update.
+
+## 8.3.0
+
+- [311] Changed the shared_preferences dependency version to '>=2.1.1 <3.0.0' to allow more compatibility.
+- [299] Updated UpgradeCard to allow scrolling of release notes.
+- Improved language code support so that it is updated with the app.
+
+## 8.2.0
+
+- [336] Changed the device_info_plus dependency version from ^9.0.1 to any which now allows for older versions.
+
+## 8.1.0
+
+- Fixed issue #312 when multiple instances of UpgradeAlert or UpgradeCard were used and the stream had already been listened to.
+- All print statements for errors and exceptions have been placed behind a debug flag.
+
+## 8.1.0-alpha.2
+
+- Fixed an issue related to the stream updates from the previous release of 8.1.0-alpha.1.
+
+- From 8.1.0-alpha.1: Fixed issue #312 when multiple instances of UpgradeAlert or UpgradeCard were used and the stream had already been listened to.
+
+## 8.1.0-alpha.1
+
+- Fixed issue #312 when multiple instances of UpgradeAlert or UpgradeCard were used and the stream had already been listened to.
+
+## 8.0.0
+
+- Added support for checking for updates every time the app resumes from the background. (#272)
+- Changed the way Upgrader is initialized to support a stream of evaluation requests. The
+stream is updated each time the app resumes from the background.
+- Added Russian release notes translation. (thanks to @filipp2911)
+
+## 8.0.0-alpha.2
+
+- Fixed an issue with checking for updates after resuming from background.
+
+## 8.0.0-alpha.1
+
+- Added support for checking for updates every time the app resumes from the background. (#272)
+- Changed the way Upgrader is initialized to support a stream of evaluation requests. The
+stream is updated each time the app resumes from the background.
+- Added Russian release notes translation. (thanks to @filipp2911)
+
+## 7.1.0
+
+- Added support for GoRouter. See the README for more details.
+- Improved platform support and testing of Appcast for different platforms.
+- Created class UpgraderDevice (and mock) to abstract the device_info details which is used for the OS version.
+
+## 7.1.0-alpha.2
+
+- Added support for GoRouter. See the README for more details.
+
+## 7.1.0-alpha.1
+
+- Improved platform support and testing of Appcast for different platforms.
+- Created class UpgraderDevice (and mock) to abstract the device_info details which is used for the OS version.
+
+## 7.0.2
+
+- Updated dependency for http to '>=0.13.6 <2.0.0'.
+- Added Turkish release notes translation.
+
+## 7.0.1
+
+- Updated dependencies device_info_plus to ^9.0.1 and package_info_plus to ^4.0.1.
+- Fixed release notes scrolling issue for Cupertino style dialogs. (#287)
+
+## 7.0.0
+
+### BREAKING CHANGES
+
+- New minimum requirements: Dart 3.0.0 and Flutter 3.10.0.
+- Updated code to avoid deprecated warnings.
+- Updated many of the package dependencies.
+
+## 6.5.0
+
+- Fixed a few null String objects causing exceptions. #284
+- Updated package_info_plus version to '>=3.0.1 <5.0.0'.
+
+## 6.4.0
+
+- Updated device_info_plus version to '>=7.0.0 <10.0.0'.
+
+## 6.3.0
+
+- Improved support for Appcast on macOS. Thanks to [@ahmet-fennel](https://github.com/ahmet-fennel) for this update.
+- Added macOS example using Appcast.
+- Downgraded the device_info_plus minimum version to 7.0.0 (from 8.0.0).
+
 ## 6.2.0
 
 - Added a parameter for the Cupertino button text style. Thanks to [@daniel-possienke](https://github.com/daniel-possienke) for this update.
@@ -262,7 +469,7 @@ be displayed. One good use for this callback is logging metrics for your app.
 ## 3.12.1
 
 * Removed the use of dart:io from the package to allow for compatibility on web.
-Added use of pacakge os_detect instead. Testing still uses dart:io.
+Added use of package os_detect instead. Testing still uses dart:io.
 
 ## 3.12.0
 
@@ -473,12 +680,12 @@ the US. The country code can be overriden with the optional `countryCode` parame
 
 ## 0.10.4
 
-* Updated dependency xml to ">=3.5.0 <5.0.0" to improve score on pub.dev in the 
+* Updated dependency xml to ">=3.5.0 <5.0.0" to improve score on pub.dev in the
 Maintenance issues and suggestions section.
 
 ## 0.10.3
 
-* Updated depenency flutter_device_locale to 0.4.0, and xml to 3.5.0, to improve score on pub.dev in the 
+* Updated depenency flutter_device_locale to 0.4.0, and xml to 3.5.0, to improve score on pub.dev in the
 Maintenance issues and suggestions section.
 
 ## 0.10.2
@@ -494,7 +701,7 @@ Maintenance issues and suggestions section.
 
 * Added options to hide ignore and later buttons. (Thanks to Karthik Ponnam)
 * Added option to close alert dialog on tap outside of alert dialog. (Thanks to Karthik Ponnam)
-* 
+*
 
 ## 0.9.0
 
@@ -554,7 +761,7 @@ defaults to debug logging on, and added command line app to evaluate the iTunes 
 * added many customizations to the widget including callbacks for onIgnore, onLater, and onUpdate
 * updated the README screenshot
 * updated tests, improved README
-* broke out widget into new file 
+* broke out widget into new file
 
 ## 0.1.0
 
